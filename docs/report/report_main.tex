@@ -10,12 +10,13 @@
 \usepackage{amsmath, amssymb}
 \usepackage{hyperref}
 \usepackage{caption}
-\usepackage{cite}
 \usepackage{listings} % para formatar blocos de código
 \usepackage{enumitem} % para controlar listas
 \usepackage{xcolor}   % necessário para cores no listings
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{biblatex}
+\usepackage{csquotes}
 \usepackage{subfigure}
 
 
@@ -34,6 +35,7 @@
 }
 
 \graphicspath{{./img/}}
+\addbibresource{references.bib}
 
 
 \begin{document}
@@ -126,6 +128,13 @@ A lista de experimentos realizados está descrita na Tabela \ref{tab:experimento
     \end{tabular}
     \caption{Lista de experimentos realizados.}
     \label{tab:experimentos}
+
+\subsection{Ambiente de testes}
+
+Os experimentos foram realizados utilizando o simulador de redes NS3 (Network Simulator 3) \cite{nsnam_2019_ns3} versão 3.46.1, em um ambiente MacOS Tahoe com um processador Apple M4 e 16GB de memória RAM. As simulações foram configuradas para rodar por um período de 20 segundos e os fluxos TCP foram iniciados no segundo 1 da simulação conforme especificado pelo professor. 
+
+A fim de simplificar o fluxo de ajustes e execução dos experimentos, foram desenvolvidos scripts em bash para automatizar o processo de configuração, execução e coleta de dados das simulações. Esses scripts permitiram a variação sistemática dos parâmetros de rede, como delay, taxa de erro e número de fluxos TCP, conforme descrito na Tabela \ref{tab:experimentos}. Além disso os mesmos scripts configuraram uma execução paralela das similações, otimizando o tempo total necessário para a realização dos experimentos. O códigoo fonte das simulações, dos scripts de automação, dos plots e deste relatório estão disponíveis no repositório GitHub \cite{gh_code}.
+
 \end{table}
 
 \section{Resultados}
@@ -180,9 +189,9 @@ Este trabalho explorou o desempenho de diferentes algoritmos de controle de cong
 Além disso, o trabalho desenvolvido proporcionou uma compreensão mais profunda dos mecanismos de controle de congestionamento e das dinâmicas de teste e valicação de diferentes estratégias. O software NS3 mostrou-se uma ferramenta valiosa para a simulação e análise de redes, permitindo a avaliação detalhada do desempenho dos algoritmos em diferentes cenários. A possibilidade de simular uma rede com uma complexidade considerável e obter métricas com relativa facilidade foi crucial para o sucesso deste estudo.
 
 \section{Referências}
+
+\printbibliography 
+
 \clearpage
-\addcontentsline{toc}{section}{Referências}
-\bibliographystyle{plain}
-\bibliography{references}
 
 \end{document}

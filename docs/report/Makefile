@@ -3,7 +3,7 @@
 TEX=pdflatex
 BIBTEX=bibtex
 MAIN=report_main
-BUILDDIR=.
+BUILDDIR=build
 
 all: $(BUILDDIR)/$(MAIN).pdf
 
