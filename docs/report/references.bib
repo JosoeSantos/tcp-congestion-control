@@ -1,7 +1,34 @@
-@book{cormen,
-  author    = {CORMEN, T. H.; LEISERSON, C. E.; RIVEST, R. L.; STEIN, C.},
-  title     = {Algoritmos: Teoria e Prática 3. ed. Rio de Janeiro: Elsevier, 2012},
-  publisher = {MIT Press},
-  year      = {2012},
-  edition   = {3th},
+@misc{a2019_ns3,
+  title = {ns-3 Tutorial — Tutorial},
+  url = {https://www.nsnam.org/docs/release/3.46/tutorial/html/index.html},
+  urldate = {2025-10-14},
+  year = {2019},
+  organization = {Nsnam.org}
+}
+
+@misc{nsnam_2019_ns3,
+  author = {nsnam},
+  title = {ns-3},
+  url = {https://www.nsnam.org/},
+  year = {2019},
+  organization = {ns-3}
+}
+
+@article{ha_cubic,
+author = {Ha, Sangtae and Rhee, Injong and Xu, Lisong},
+title = {CUBIC: a new TCP-friendly high-speed TCP variant},
+year = {2008},
+issue_date = {July 2008},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {42},
+number = {5},
+issn = {0163-5980},
+url = {https://doi.org/10.1145/1400097.1400105},
+doi = {10.1145/1400097.1400105},
+abstract = {CUBIC is a congestion control protocol for TCP (transmission control protocol) and the current default TCP algorithm in Linux. The protocol modifies the linear window growth function of existing TCP standards to be a cubic function in order to improve the scalability of TCP over fast and long distance networks. It also achieves more equitable bandwidth allocations among flows with different RTTs (round trip times) by making the window growth to be independent of RTT -- thus those flows grow their congestion window at the same rate. During steady state, CUBIC increases the window size aggressively when the window is far from the saturation point, and the slowly when it is close to the saturation point. This feature allows CUBIC to be very scalable when the bandwidth and delay product of the network is large, and at the same time, be highly stable and also fair to standard TCP flows. The implementation of CUBIC in Linux has gone through several upgrades. This paper documents its design, implementation, performance and evolution as the default TCP algorithm of Linux.},
+journal = {SIGOPS Oper. Syst. Rev.},
+month = jul,
+pages = {64-74},
+numpages = {11}
 }

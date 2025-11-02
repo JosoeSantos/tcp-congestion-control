@@ -1,3 +1,13 @@
 {
-    "latex-workshop.latex.outDir": "%DIR%/build"
+    "latex-workshop.latex.outDir": "%DIR%/build",
+    "latex-workshop.latex.bibDirs": [
+        "%DIR%/build",
+        "%DIR%"
+    ],
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.wrappingStrategy": "advanced",
+        "editor.wordWrap": "wordWrapColumn",
+    }
 }

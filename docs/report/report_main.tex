@@ -14,6 +14,10 @@
 \usepackage{listings} % para formatar blocos de código
 \usepackage{enumitem} % para controlar listas
 \usepackage{xcolor}   % necessário para cores no listings
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{subfigure}
+
 
 % Configurações do listings
 \lstset{
@@ -29,15 +33,8 @@
   showstringspaces=false
 }
 
-\graphicspath{{./}{../}{../../}{../../plots/}{../../plots/img/}}
+\graphicspath{{./img/}}
 
-% \title{Relatório do Projeto de Grafos e Algoritmos de Busca}
-% \author{
-% Áquila Oliveira Souza | 2021019327 \\ 
-% Felippe Veloso Marinho | 2021072260 \\ 
-% Jefferson Pereira de Souza | 2022099049
-% }
-% \date{\today}
 
 \begin{document}
 
@@ -49,17 +46,13 @@
     {\Large \textbf{Universidade Federal de Minas Gerais}}\\[0.3cm]
     {\large Engenharia de Sistemas}\\[2cm]
     
-    {\Huge \textbf{Relatório do Projeto de Grafos e Algoritmos de Busca}}\\[1.5cm]
+    {\Huge \textbf{Analise de Controle de Congestionamento TCP}}\\[1.5cm]
     
-    \textbf{Fundamentos de Inteligência Artificial}\\[0.5cm]
-    \textbf{Professores:} Cristiano Castro e João Pedro Campos\\[1.5cm]
+    \textbf{Introdução a Sistemas Distribuidos}\\[0.5cm]
+    \textbf{Professor: Aldri Luiz dos Santos }  \\[1.5cm]
     
     \begin{flushleft}
-        \textbf{Alunos:}\\
-        Áquila Oliveira Souza --- 2021019327\\
-        Arthur Jorge --- 2022055718\\
-        Felippe Veloso Marinho --- 2021072260\\
-        Jefferson Pereira de Souza --- 2022099049\\
+        \textbf{Aluno:}\\
         Josoé Santos Queiroz --- 2019026982
     \end{flushleft}
     
@@ -77,14 +70,115 @@
 % ==============================
 \section{Introdução}
 
-\section{Modelagem do Problema em Forma de Grafo}
+O protocolo TCP (Transmission Control Protocol) é um dos principais protocolos de comunicação utilizados na internet para garantir a entrega confiável de dados entre dispositivos. Um dos desafios enfrentados pelo TCP é o controle de congestionamento, que visa evitar a sobrecarga da rede e garantir um desempenho eficiente na transmissão de dados. 
 
-O problema da \textit{Ponte e da Tocha} foi modelado como um problema de busca em espaço de estados e também como um CSP (\textit{Constraint Satisfaction Problem}). Essa abordagem permite tanto a análise formal do problema em termos de grafos, como também a aplicação de algoritmos de busca clássicos para encontrar soluções ótimas. 
+Neste trabalho, exploramos diferentes condições para o controle de congestionamento em um link de gargalo. Analisamos também o impacto que diferentes algoritmos de controle de congestionamento têm sobre o desempenho da rede, utilizando simulações do software NS3 \cite{nsnam_2019_ns3} para avaliar métricas como taxa de transferência, atraso e perda de pacotes.
 
-\subsection{Estados}
-\subsection{Definição Formal do Grafo}
+\section{Metodologia}
 
-\subsection{Algoritmo de Dijkstra}
+O experimento foi condizido utilizando duas topologias de rede distintas, cada uma representando diferentes condições de controle de congestionamento. A primeira topologia ilustrada pela Figura \ref{fig:topologia1} consiste em um cenário de rede aonde só existe uma linha entre as duas pontas extremas da topologia. Já a segunda topologia, ilustrada pela Figura \ref{fig:topologia2}, consiste em um cenário de rede aonde ao final do link de gargalo, existem duas linhas diferentes que podem ser utilizadas para o envio dos pacotes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./img/topologia1.png}
+    \caption{Topologia 1: Rede com um único caminho entre as pontas extremas.}
+    \label{fig:topologia1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./img/topologia2.png}
+    \caption{Topologia 2: Rede com dois caminhos possíveis entre as pontas extremas.}
+    \label{fig:topologia2}
+\end{figure}
+
+Para a primeira topologia observamos a diferença de desempenho entre os algorítmos de controle de congestionamento TCP NewReno e TCP CUBIC \cite{ha_cubic}. Para isto foram realizados testes variando a o delay do link de gargalo e a taxa de erro de pacotes.
+
+%% Paragrafo gerado por IA REVISAR
+Já para a segunda topologia, além de observarmos a diferença de desempenho entre os algorítmos de controle de congestionamento TCP NewReno e TCP CUBIC, também observamos o impacto do balanceamento de carga na rede. Para isto foram realizados testes variando a o delay do link de gargalo, a taxa de erro de pacotes e o balanceamento de carga entre os dois links disponíveis.
+
+A lista de experimentos realizados está descrita na Tabela \ref{tab:experimentos}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        \toprule
+        Teste &  Delay (ms) & D.R. (Mbps) & Taxa de Erro (\%) & Fluxos TCP \\
+        \bottomrule
+        \toprule
+        \multirow{1}{*}{1.a} & 100 & 10 & 1e-05 & 1  \\        \hline
+        \multirow{6}{*}{1.b} & 50 & 1 & 1e-05 & 1,2,4 \\
+                              & 100 & 1 & 1e-05 & 1,2,4 \\
+                              & 150 & 1 & 1e-05 & 1,2,4 \\
+                              & 200 & 1 & 1e-05 & 1,2,4 \\
+                              & 250 & 1 & 1e-05 & 1,2,4 \\
+                              & 300 & 1 & 1e-05 & 1,2,4 \\
+        \hline
+        \multirow{6}{*}{1.c} & 100 & 1 & 1e-05 & 1,2,4 \\
+                              & 100 & 1 & 5e-05 & 1,2,4 \\
+                              & 100 & 1 & 1e-04 & 1,2,4 \\
+                              & 100 & 1 & 5e-04 & 1,2,4 \\
+                              & 100 & 1 & 1e-03 & 1,2,4 \\
+        \hline
+        2 & 100 & 1 & 1e-05 & 2,4,6,8 \\
+        \bottomrule
+        \hline
+    \end{tabular}
+    \caption{Lista de experimentos realizados.}
+    \label{tab:experimentos}
+\end{table}
+
+\section{Resultados}
+
+O experimento 1.a foi condizido para observar a curva de crescimento da janela de congestionamento para os algorítmos TCP NewReno e TCP CUBIC. A Figura \ref{fig:exp1a1} apresenta o resultado obtido. A comparação da Congestion Window (Cwnd) feita demonstra que o TCP CUBIC apresenta um crescimento mais estável e permite um fluxo de dados mais consistente em comparação ao TCP NewReno, que exibe variações mais abruptas na janela de congestionamento.
+
+\begin{figure}
+    \centering
+    \hfill
+    \subfigure[Cwnd CUBIC]{\includegraphics[width=0.4\textwidth]{./img/cwnd-TcpCubic.png}}
+    \hfill
+    \subfigure[Cwnd NewReno]{\includegraphics[width=0.4\textwidth]{./img/cwnd-TcpNewReno.png}}    \hfill
+    \caption{Comparação do crescimento da janela de congestionamento para TCP CUBIC e TCP NewReno no experimento 1.a.}
+    \label{fig:exp1a1}
+\end{figure}
+
+Para o segundo experimento 1.b (ver tabela \ref{tab:experimentos}), foram realizados testes variando o delay do link de gargalo. A Figura \ref{fig:exp1b} apresenta o resultado obtido. Observa-se que o TCP CUBIC mantém uma taxa de transferência mais alta e estável em comparação ao TCP NewReno indicando melhor adaptação a variações de delay na rede.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{img/goodput_vs_delay.png}
+    \caption{Comparação do throughput para TCP CUBIC e TCP NewReno no experimento 1.b.}
+    \label{fig:exp1b}
+\end{figure}
+
+O terceiro experimento 1.c, foram realizados testes variando a taxa de erro de pacotes. A Figura \ref{fig:exp1c} apresenta o resultado obtido. Observa-se que o TCP CUBIC mantém uma taxa de transferência mais alta e estável em comparação ao TCP NewReno indicando melhor adaptação a variações na taxa de erro de pacotes na rede. Para melhor visualização dos resultados, os gráficos foram plotados em escala logarítmica e linear.
+\begin{figure}
+    \centering
+    \hfill
+    \subfigure[Escala Logarítmica]{\includegraphics[width=0.45\textwidth]{./img/goodput_vs_error_rate_log.png}}
+    \hfill
+    \subfigure[Escala Linear]{\includegraphics[width=0.45\textwidth]{./img/goodput_vs_error_rate_linear.png}}    \hfill
+    \caption{Comparação do throughput para TCP CUBIC e TCP NewReno no experimento 1.c.}
+    \label{fig:exp1c}
+\end{figure}
+
+Os experimentos 1.a, 1.b e 1.c demonstram que o TCP CUBIC é mais eficiente em manter uma taxa de transferência elevada e estável em condições adversas de rede, como altos delays e taxas de erro elevadas, em comparação ao TCP NewReno. Isso está em conformidade com \cite{ha_cubic} que em seu trabalho afirma a eficiência do TCP cúbic em ambientes de rede modernos.
+
+Por fim o trabalho também analisou o impacto do balanceamento de carga na rede utilizando a topologia 2. A Figura \ref{fig:exp2} apresenta o resultado obtido. Observa-se que o balanceamento de carga entre os dois links disponíveis melhora significativamente a taxa de transferência para ambos os algoritmos de controle de congestionamento, com o TCP CUBIC continuando a apresentar um desempenho superior ao TCP NewReno.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{img/goodput_vs_flows.png}
+    \caption{Comparação do throughput para TCP CUBIC e TCP NewReno no experimento 2 com balanceamento de carga.}
+    \label{fig:exp2}
+\end{figure}
+
+\section{Conclusões}
+
+Este trabalho explorou o desempenho de diferentes algoritmos de controle de congestionamento TCP, especificamente TCP NewReno e TCP CUBIC. Através de simulações utilizando o NS3, foi possível observar que o TCP CUBIC apresenta um desempenho superior em termos de taxa de transferência, especialmente em condições adversas de rede, como altos delays e taxas de erro elevadas. Além disso, o balanceamento de carga mostrou-se eficaz na melhoria do desempenho da rede para ambos os algoritmos.
+
+Além disso, o trabalho desenvolvido proporcionou uma compreensão mais profunda dos mecanismos de controle de congestionamento e das dinâmicas de teste e valicação de diferentes estratégias. O software NS3 mostrou-se uma ferramenta valiosa para a simulação e análise de redes, permitindo a avaliação detalhada do desempenho dos algoritmos em diferentes cenários. A possibilidade de simular uma rede com uma complexidade considerável e obter métricas com relativa facilidade foi crucial para o sucesso deste estudo.
+
 \section{Referências}
 \clearpage
 \addcontentsline{toc}{section}{Referências}
