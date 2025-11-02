@@ -78,7 +78,7 @@ Neste trabalho, exploramos diferentes condições para o controle de congestiona
 
 \section{Metodologia}
 
-O experimento foi condizido utilizando duas topologias de rede distintas, cada uma representando diferentes condições de controle de congestionamento. A primeira topologia ilustrada pela Figura \ref{fig:topologia1} consiste em um cenário de rede aonde só existe uma linha entre as duas pontas extremas da topologia. Já a segunda topologia, ilustrada pela Figura \ref{fig:topologia2}, consiste em um cenário de rede aonde ao final do link de gargalo, existem duas linhas diferentes que podem ser utilizadas para o envio dos pacotes.
+O experimento foi condizido utilizando duas topologias de rede distintas, cada uma representando diferentes condições de controle de congestionamento. A primeira topologia ilustrada pela Figura \ref{fig:topologia1} consiste em um cenário de rede onde só existe uma linha entre as duas pontas extremas da topologia. Já a segunda rede validada, ilustrada pela Figura \ref{fig:topologia2}, consiste em um cenário de rede que ao final do link de gargalo, existem duas linhas diferentes que podem ser utilizadas para o envio dos pacotes.
 
 \begin{figure}[H]
     \centering
@@ -96,8 +96,7 @@ O experimento foi condizido utilizando duas topologias de rede distintas, cada u
 
 Para a primeira topologia observamos a diferença de desempenho entre os algorítmos de controle de congestionamento TCP NewReno e TCP CUBIC \cite{ha_cubic}. Para isto foram realizados testes variando a o delay do link de gargalo e a taxa de erro de pacotes.
 
-%% Paragrafo gerado por IA REVISAR
-Já para a segunda topologia, além de observarmos a diferença de desempenho entre os algorítmos de controle de congestionamento TCP NewReno e TCP CUBIC, também observamos o impacto do balanceamento de carga na rede. Para isto foram realizados testes variando a o delay do link de gargalo, a taxa de erro de pacotes e o balanceamento de carga entre os dois links disponíveis.
+Já para a segunda topologia, além de observarmos a diferença de desempenho entre os algorítmos de controle de congestionamento TCP NewReno e TCP CUBIC, também observamos o impacto do balanceamento de carga na rede. Para isto foram realizados testes variando o número de fluxos TCP ativos na rede e validando o desempenho dos algorítmos de controle de congestionamento.
 
 A lista de experimentos realizados está descrita na Tabela \ref{tab:experimentos}.
 
@@ -160,7 +159,8 @@ Para o segundo experimento 1.b (ver tabela \ref{tab:experimentos}), foram realiz
     \label{fig:exp1b}
 \end{figure}
 
-O terceiro experimento 1.c, foram realizados testes variando a taxa de erro de pacotes. A Figura \ref{fig:exp1c} apresenta o resultado obtido. Observa-se que o TCP CUBIC mantém uma taxa de transferência mais alta e estável em comparação ao TCP NewReno indicando melhor adaptação a variações na taxa de erro de pacotes na rede. Para melhor visualização dos resultados, os gráficos foram plotados em escala logarítmica e linear.
+O terceiro experimento 1.c, foram realizados testes variando a taxa de erro de pacotes. A Figura \ref{fig:exp1c} apresenta o resultado obtido. Observa-se que o TCP CUBIC mantém uma taxa de transferência mais alta e estável em comparação ao TCP NewReno indicando melhor adaptação a variações na taxa de erro de pacotes na rede. Para melhor visualização dos resultados, os gráficos analisados foram plotados em escala logarítmica e linear.
+
 \begin{figure}
     \centering
     \hfill
@@ -173,7 +173,7 @@ O terceiro experimento 1.c, foram realizados testes variando a taxa de erro de p
 
 Os experimentos 1.a, 1.b e 1.c demonstram que o TCP CUBIC é mais eficiente em manter uma taxa de transferência elevada e estável em condições adversas de rede, como altos delays e taxas de erro elevadas, em comparação ao TCP NewReno. Isso está em conformidade com \cite{ha_cubic} que em seu trabalho afirma a eficiência do TCP cúbic em ambientes de rede modernos.
 
-Por fim o trabalho também analisou o impacto do balanceamento de carga na rede utilizando a topologia 2. A Figura \ref{fig:exp2} apresenta o resultado obtido. Observa-se que o balanceamento de carga entre os dois links disponíveis melhora significativamente a taxa de transferência para ambos os algoritmos de controle de congestionamento, com o TCP CUBIC continuando a apresentar um desempenho superior ao TCP NewReno.
+Por fim o trabalho também analisou o impacto do balanceamento de carga na rede utilizando a topologia 2. A Figura \ref{fig:exp2} apresenta o resultado obtido.  Nela observa-se que o balanceamento de carga entre os dois links disponíveis melhora significativamente a taxa de transferência para ambos os algoritmos de controle de congestionamento, com o TCP CUBIC continuando a apresentar um desempenho superior ao TCP NewReno.
 
 \begin{figure}
     \centering
